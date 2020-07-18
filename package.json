@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "daily-sentence-client",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -30,5 +30,12 @@
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
-  }
+  },
+  "description": "## Project setup ``` npm install ```",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "author": "bryan yunis",
+  "license": "ISC"
 }
