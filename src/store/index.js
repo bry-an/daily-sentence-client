@@ -9,7 +9,7 @@ export default new Vuex.Store({
   mutations: {
   },
   actions: {
-    getSentence({ commit }, { date = '', id = '' }) {
+    getSentence() {
 
     },
   },

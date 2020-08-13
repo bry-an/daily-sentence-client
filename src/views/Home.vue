@@ -1,12 +1,25 @@
 <template>
-  <div class="home">
+  <div class="sentence-input">
+    <b-field label="Sentence">
+            <b-input maxlength="256" v-model="sentence" type="textarea"></b-input>
+        </b-field>
+   <b-button>Submit</b-button>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 
 export default {
   name: 'Home',
+  data: () => ({
+    sentence: '',
+  }),
 };
 </script>
+
+<style lang="sass">
+.sentence-input
+  width: 50%
+  margin: auto
+
+</style>
