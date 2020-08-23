@@ -16,7 +16,7 @@ export default {
   }),
   methods: {
     submitSentence() {
-      this.$store.dispatch('createSentence', this.sentence);
+      this.$store.dispatch('createSentence', { text: this.sentence });
     },
   },
 };

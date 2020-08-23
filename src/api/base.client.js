@@ -1,4 +1,4 @@
-import api from './api';
+import api from './axios';
 
 class BaseApi {
   constructor({ path }) {
@@ -25,14 +25,13 @@ class BaseApi {
   }
 
   post({
-    id = '', params = '', path = '', payload = '',
+    id = '', path = '', payload = '',
   }) {
     const pathParams = { path, id };
     const url = this.getPath(pathParams);
-    return this.api.post({
-      params,
-      url,
-      data: payload,
+    const axiosPayload = { ...payload, axios: true };
+    return this.api.post(url, {
+      data: axiosPayload,
     });
   }
 
@@ -41,10 +40,11 @@ class BaseApi {
   }) {
     const pathParams = { path, id };
     const url = this.getPath(pathParams);
+    const axiosPayload = { ...payload, axios: true };
     return this.api.put({
       params,
       url,
-      data: payload,
+      data: axiosPayload,
     });
   }
 

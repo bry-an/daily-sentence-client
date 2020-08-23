@@ -6,5 +6,5 @@ const sentenceClient = new BaseApi({
 
 export default {
   get: (id) => sentenceClient.get({ id }),
-  create: (params) => sentenceClient.post({ params, path: '/create' }),
+  create: (payload) => sentenceClient.post({ payload, path: '/create' }),
 };

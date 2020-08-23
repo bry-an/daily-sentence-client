@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import sentenceClient from '../api';
+import { sentenceClient } from '../api';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    dailySavedSentence: '',
+    dailySavedSentence: {},
   },
   mutations: {
     SET_DAILY_SAVED_SENTENCE(state, sentence) {
@@ -14,14 +14,14 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    async createSentence({ commit }, { sentence }) {
+    async createSentence({ commit }, { text }) {
       const userId = '5f34ab8c85c0bcf75f0013d4';
       const res = await sentenceClient.create({
-        user: userId,
-        sentence,
+        userId,
+        text,
+        date: new Date(),
       });
-      console.log('sentence create response', res);
-      commit('SET_DAILY_SAVED_SENTENCE', res.data.text);
+      commit('SET_DAILY_SAVED_SENTENCE', res.data.sentence);
     },
   },
   modules: {
