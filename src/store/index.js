@@ -8,6 +8,9 @@ export default new Vuex.Store({
   state: {
     dailySavedSentence: {},
   },
+  getters: {
+    dailySavedSentence: (state) => state.dailySavedSentence,
+  },
   mutations: {
     SET_DAILY_SAVED_SENTENCE(state, sentence) {
       state.dailySavedSentence = sentence;
