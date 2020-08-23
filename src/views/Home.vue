@@ -3,7 +3,7 @@
     <b-field label="Sentence">
             <b-input maxlength="256" v-model="sentence" type="textarea"></b-input>
         </b-field>
-   <b-button>Submit</b-button>
+   <b-button @click="submitSentence">Submit</b-button>
   </div>
 </template>
 
@@ -14,6 +14,11 @@ export default {
   data: () => ({
     sentence: '',
   }),
+  methods: {
+    submitSentence() {
+      this.$store.dispatch('createSentence', this.sentence);
+    },
+  },
 };
 </script>
 

@@ -51,10 +51,9 @@ class BaseApi {
   delete({ id = '', params = '', path = '' }) {
     const pathParams = { path, id };
     const url = this.getPath(pathParams);
-    return this.api.get({
+    return this.api.delete({
       params,
       url,
-      data: payload,
     });
   }
 }

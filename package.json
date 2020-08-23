@@ -2,12 +2,15 @@
   "name": "daily-sentence-client",
   "version": "0.1.0",
   "private": true,
+  "description": "## Project setup ``` npm install ```",
+  "author": "bryan yunis",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
+  "main": "index.js",
   "dependencies": {
     "axios": "^0.19.2",
     "buefy": "^0.8.20",
@@ -18,7 +21,7 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",
-    "@vue/cli-plugin-eslint": "~4.4.0",
+    "@vue/cli-plugin-eslint": "^4.5.3",
     "@vue/cli-plugin-router": "~4.4.0",
     "@vue/cli-plugin-unit-jest": "~4.4.0",
     "@vue/cli-plugin-vuex": "~4.4.0",
@@ -33,11 +36,8 @@
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
   },
-  "description": "## Project setup ``` npm install ```",
-  "main": "index.js",
   "directories": {
     "test": "tests"
   },
-  "author": "bryan yunis",
   "license": "ISC"
 }

@@ -1,5 +1,7 @@
 import sentenceClient from './sentence.client';
+import userClient from './user.client';
 
-export default {
+export {
   sentenceClient,
+  userClient,
 };
