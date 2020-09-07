@@ -21,21 +21,33 @@
         </b-field>
    <b-button @click="submitSentence">Submit</b-button>
   </div>
+  <div class="sentence-container">
+    <sentence-card
+      v-for="sentence in sentences"
+      :key="sentence._id"
+      :sentence="sentence"
+    >
 
+    </sentence-card>
+  </div>
 </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import { format } from 'date-fns';
+import SentenceCard from '../components/SentenceCard.vue';
 
 export default {
   name: 'Home',
+  components: {
+    SentenceCard,
+  },
   data: () => ({
     sentence: '',
   }),
   computed: {
-    ...mapGetters(['dailySavedSentence']),
+    ...mapGetters(['dailySavedSentence', 'sentences']),
     isSavedSentenceToday() {
       return Object.prototype.hasOwnProperty.call(this.dailySavedSentence, '_id');
     },
@@ -44,9 +56,13 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['fetchSentences']),
     submitSentence() {
       this.$store.dispatch('createSentence', { text: this.sentence });
     },
+  },
+  mounted() {
+    this.fetchSentences();
   },
 };
 </script>
@@ -58,5 +74,8 @@ export default {
 
 h2
   @apply is-size-1
+
+.sentence-container
+  margin-top: 1rem
 
 </style>

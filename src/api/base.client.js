@@ -18,9 +18,8 @@ class BaseApi {
   get({ id = '', params = '', path = '' }) {
     const pathParams = { path, id };
     const url = this.getPath(pathParams);
-    return this.api.get({
+    return this.api.get(url, {
       params,
-      url,
     });
   }
 
