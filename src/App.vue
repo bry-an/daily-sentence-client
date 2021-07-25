@@ -11,17 +11,13 @@
 
 @import "./styles.scss";
 @import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap');
-@import "~bulma/sass/utilities/_all";
-@import "~bulma";
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700;900&display=swap');
 
 h2 {
-  @apply is-size-1;
   font-size: 3rem;
 }
 #app {
-  text-align: center;
   font-family: sans-serif;
-  background-color: $latte;
   color: $coffee;
 }
 

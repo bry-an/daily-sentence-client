@@ -1,7 +1,7 @@
 <template>
 <div class="sentence-card">
     <span class="date">{{formattedDate}}</span>
-    <div class="box is-size-4">
+    <div class="text-lg">
         {{ text }}
     </div>
 </div>
