@@ -9,6 +9,10 @@ module.exports = {
             avocadoToast: '#697A21',
             paprika: '#BB342F',
         },
+        fontFamily: {
+            source: 'Red Hat Display, sans-serif',
+            cursive: 'Cedarville Cursive, cursive',
+        },
         extend: {},
     },
     variants: {

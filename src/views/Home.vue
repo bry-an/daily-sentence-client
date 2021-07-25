@@ -1,59 +1,62 @@
 <template>
 <div class="home">
-<h1 class="text-2xl">Welcome to My Daily Sentence</h1>
-  <div
-    v-if="isSavedSentenceToday">
+    <h1 class="text-6xl text-center">My Daily Sentence</h1>
+      <div
+        v-if="isSavedSentenceToday"
+        class="flex flex-col">
+        <h2 class="text-4xl text-center mt-4">
+          {{today}}
+        </h2>
 
-    <h2 class="text-2xl">
-      {{today}}
-    </h2>
+        <div class="mt-4 text-3xl justify-center text-center">
+          {{dailySavedSentence.text}}
+        </div>
 
-    <div class="mt-4">
-      {{dailySavedSentence.text}}
+      </div>
+      <div
+        v-else
+        class="sentence-input-container">
+        <div class="date-header pl-2 pt-1 shadow">
+            {{today}}
+        </div>
+        <textarea
+            maxlength="256"
+            class="mx-auto h-6 focus:outline-none focus:shadow resize-none h-16 p-3 pt-9"
+            id="sentence-input"
+            v-model="sentence"/>
+            <div class="w-1/5 m-auto flex justify-center">
+               <button
+                    class="py-2 px-3 my-2 bg-latte border rounded font-source w-full text-lg"
+                    @click="submitSentence">
+                    Submit
+                </button>
+            </div>
+       <hr/>
+       <h3 class="text-xl">Previous daily sentences</h3>
+      </div>
+      <div class="sentence-container">
+        <sentence-card
+          v-for="sentence in sentences"
+          :key="sentence._id"
+          :sentence="sentence"
+        >
+        </sentence-card>
+      </div>
     </div>
-
-  </div>
-  <div
-    v-else
-    class="sentence-input-container">
-    <div class="date-header pl-2 pt-1 shadow">
-        {{today}}
-    </div>
-    <textarea
-        maxlength="256"
-        class="mx-auto h-6 focus:outline-none focus:shadow resize-none h-16 p-3 pt-9"
-        id="sentence-input"
-        v-model="sentence"/>
-   <button class="p-2 my-2 bg-latte border rounded" @click="submitSentence">Submit</button>
-   <hr/>
-   <h3 class="text-xl">Previous daily sentences</h3>
-  </div>
-  <div class="sentence-container">
-  <Journal />
-    <sentence-card
-      v-for="sentence in sentences"
-      :key="sentence._id"
-      :sentence="sentence"
-    >
-    </sentence-card>
-  </div>
-</div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 import { format } from 'date-fns';
 import SentenceCard from '../components/SentenceCard.vue';
-import Journal from '../components/Journal.vue';
 
 export default {
     name: 'Home',
     components: {
         SentenceCard,
-        Journal,
     },
     data: () => ({
-        sentence: 'July 25',
+        sentence: '',
     }),
     computed: {
         ...mapGetters(['dailySavedSentence', 'sentences']),
