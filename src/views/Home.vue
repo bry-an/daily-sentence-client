@@ -1,5 +1,6 @@
 <template>
-<div>
+<div class="home">
+<h1 class="is-size-1">Welcome to My Daily Sentence</h1>
   <div
     v-if="isSavedSentenceToday"
     class="has-text-grey-darker">
@@ -15,11 +16,12 @@
   </div>
   <div
     v-else
-    class="sentence-input">
-    <b-field label="Sentence">
-            <b-input maxlength="256" v-model="sentence" type="textarea"></b-input>
-        </b-field>
+    class="sentence-input-container">
+    <label for="sentence-input">Today's sentence</label>
+    <textarea maxlength="256" id="sentence-input" v-model="sentence"/>
    <b-button @click="submitSentence">Submit</b-button>
+   <hr/>
+   <h3 class="is-size-3">Previous daily sentences</h3>
   </div>
   <div class="sentence-container">
     <sentence-card
@@ -27,50 +29,55 @@
       :key="sentence._id"
       :sentence="sentence"
     >
-
     </sentence-card>
   </div>
 </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
 import { format } from 'date-fns';
 import SentenceCard from '../components/SentenceCard.vue';
 
 export default {
-  name: 'Home',
-  components: {
-    SentenceCard,
-  },
-  data: () => ({
-    sentence: '',
-  }),
-  computed: {
-    ...mapGetters(['dailySavedSentence', 'sentences']),
-    isSavedSentenceToday() {
-      return Object.prototype.hasOwnProperty.call(this.dailySavedSentence, '_id');
+    name: 'Home',
+    components: {
+        SentenceCard,
     },
-    today() {
-      return format(new Date(), 'MMMM do yyyy');
+    data: () => ({
+        sentence: '',
+    }),
+    computed: {
+        ...mapGetters(['dailySavedSentence', 'sentences']),
+        isSavedSentenceToday() {
+            return Object.prototype.hasOwnProperty.call(this.dailySavedSentence, '_id');
+        },
+        today() {
+            return format(new Date(), 'MMMM do yyyy');
+        },
     },
-  },
-  methods: {
-    ...mapActions(['fetchSentences']),
-    submitSentence() {
-      this.$store.dispatch('createSentence', { text: this.sentence });
+    methods: {
+        submitSentence() {
+            this.$store.dispatch('createSentence', { text: this.sentence });
+        },
     },
-  },
-  mounted() {
-    this.fetchSentences();
-  },
+    mounted() {
+        this.$store.dispatch('fetchSentences');
+    },
 };
 </script>
 
 <style lang="sass">
-.sentence-input
+
+.home
+    font-family: 'Cedarville Cursive', cursive
+
+#sentence-input
   width: 50%
-  margin: auto
+  margin: 2rem auto
+  font-family: 'Cedarville Cursive', cursive
+  display: block
+  font-size: 2rem
 
 h2
   @apply is-size-1

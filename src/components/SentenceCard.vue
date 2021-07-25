@@ -1,33 +1,52 @@
 <template>
-<div class="box sentence-card">
-    {{sentence.text}}
-
+<div class="sentence-card">
+    <span class="date">{{formattedDate}}</span>
+    <div class="box is-size-4">
+        {{ text }}
+    </div>
 </div>
-
 </template>
 
 <script>
-export default {
-  name: 'SentenceCard',
-  props: {
-    sentence: {
-      type: String,
-      required: true,
-      default: () => true,
-    },
-  },
-  computed: {
-    sentenceDate: () => this.sentence.date || Date.now(),
-  },
+import { propOr } from 'ramda';
+import { format } from 'date-fns';
 
+export default {
+    name: 'SentenceCard',
+    props: {
+        sentence: {
+            type: Object,
+            required: true,
+            default: () => ({}),
+        },
+    },
+    computed: {
+        text() {
+            return propOr('', 'text', this.sentence);
+        },
+        formattedDate() {
+            const createdAt = propOr(new Date(), 'createdAt', this.sentence);
+            return format(new Date(createdAt), 'MM/dd/yyyy');
+        },
+    },
 };
 </script>
 
 <style lang="scss">
+@import "../styles.scss";
 
 .sentence-card {
     width: 50%;
-    margin: auto;
+    margin: 3rem auto;
+}
+.box {
+    background-color: $paprika;
+    color: $coffee;
+}
+
+.date {
+    font-weight: bold;
+    font-size: 1.5rem;
 }
 
 </style>
