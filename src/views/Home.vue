@@ -11,6 +11,7 @@
         <div class="mt-4 text-3xl justify-center text-center">
           {{dailySavedSentence.text}}
         </div>
+        <PencilIcon />
 
       </div>
       <div
@@ -49,11 +50,13 @@
 import { mapGetters } from 'vuex';
 import { format } from 'date-fns';
 import SentenceCard from '../components/SentenceCard.vue';
+import PencilIcon from '../components/icons/Pencil.vue';
 
 export default {
     name: 'Home',
     components: {
         SentenceCard,
+        PencilIcon,
     },
     data: () => ({
         sentence: '',

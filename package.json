@@ -15,6 +15,7 @@
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "date-fns": "^2.15.0",
+    "date-fns-tz": "^1.1.6",
     "ramda": "^0.27.1",
     "vue": "^2.6.11",
     "vue-router": "^3.4.3",
@@ -39,6 +40,11 @@
     "sass-loader": "^8.0.2",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.7",
     "vue-template-compiler": "^2.6.11"
+  },
+  "eslintConfig": {
+      "rules":{
+         "import/prefer-default-export": "never"
+      }
   },
   "directories": {
     "test": "tests"
