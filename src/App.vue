@@ -1,10 +1,9 @@
 <template>
-  <div id="app" class="py-4">
-  <!--
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-    </div>
-    -->
+  <div id="app" class="py-4 min-h-screen">
+    <nav class="flex py-4 justify-around">
+      <router-link to="/">Today</router-link>
+      <router-link to="/earlier">Earlier</router-link>
+    </nav>
     <router-view/>
   </div>
 </template>
@@ -21,9 +20,7 @@ h2 {
 #app {
   font-family: sans-serif;
   color: $coffee;
+  background-color: #fbfbfb
 }
 
-#nav {
-  padding: 30px;
-}
 </style>

@@ -42,9 +42,9 @@
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
-      "rules":{
-         "import/prefer-default-export": "never"
-      }
+    "rules": {
+      "import/prefer-default-export": "never"
+    }
   },
   "directories": {
     "test": "tests"

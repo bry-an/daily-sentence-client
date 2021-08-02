@@ -1,10 +1,12 @@
-import { utcToZonedTime, isSameDay } from 'date-fns-tz';
+import { utcToZonedTime } from 'date-fns-tz';
+import { isSameDay } from 'date-fns';
 import isEmpty from 'ramda/src/isEmpty';
 import complement from 'ramda/src/complement';
 import cond from 'ramda/src/cond';
 import isNil from 'ramda/src/isNil';
 import anyPass from 'ramda/src/anyPass';
 import identity from 'ramda/src/identity';
+import pathOr from 'ramda/src/pathOr';
 import T from 'ramda/src/T';
 
 export const sentenceMapper = ({
@@ -25,3 +27,6 @@ export const maybe = (fn) => cond([
 export const sentenceCreatedSameDay = (sentence) => isSameDay(new Date(), sentence.createdAt);
 
 export const hasLength = complement(isEmpty);
+
+// API
+export const parseSentenceResponse = pathOr([], ['data', 'sentences']);

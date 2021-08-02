@@ -1,10 +1,12 @@
 <template>
-<div class="sentence-card">
-    <span class="date">{{formattedDate}}</span>
-    <div class="text-lg">
-        {{ text }}
-    </div>
-</div>
+    <article class="previous">
+        <div class="sentence-card">
+            <span class="date">{{formattedDate}}</span>
+            <div class="text-lg">
+                {{ text }}
+            </div>
+        </div>
+    </article>
 </template>
 
 <script>
@@ -35,6 +37,9 @@ export default {
 <style lang="scss">
 @import "../styles.scss";
 
+.previous {
+  font-family: 'Cedarville Cursive', cursive;
+}
 .sentence-card {
     width: 50%;
     margin: 3rem auto;

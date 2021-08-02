@@ -1,56 +1,65 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import pathOr from 'ramda/src/pathOr';
 import pipe from 'ramda/src/pipe';
 import map from 'ramda/src/map';
 import head from 'ramda/src/head';
-import { sentenceMapper, sentenceCreatedSameDay, hasLength } from '../util';
+import {
+    sentenceMapper, sentenceCreatedSameDay, hasLength, parseSentenceResponse,
+} from '../util';
 import { sentenceClient, userClient } from '../api';
+
+const { create: createSentence, update: updateSentence } = sentenceClient;
+const { fetchSentences } = userClient;
 
 Vue.use(Vuex);
 
 const getDefaultState = () => ({
-    dailySavedSentence: {},
+    sentenceToday: {},
     sentences: [],
 });
 
-const state = getDefaultState;
+const state = getDefaultState();
 
 const getters = {
-    dailySavedSentence: (state) => state.dailySavedSentence,
+    sentenceToday: (state) => state.sentenceToday,
     sentences: (state) => state.sentences,
-    mostRecentSentenceCreatedToday: (state) => (hasLength
+    hasSentenceToday: (state) => (hasLength(state.sentences)
         ? sentenceCreatedSameDay(head(state.sentences))
         : false),
 };
 
 const mutations = {
-    SET_DAILY_SAVED_SENTENCE(state, sentence) {
-        state.dailySavedSentence = sentence;
+    SET_SENTENCE_TODAY(state, sentence) {
+        state.sentenceToday = sentence;
     },
     SET_SENTENCES(state, sentences) {
         state.sentences = sentences;
     },
 };
 const actions = {
-    async createSentence({ commit }, { text }) {
+    createSentence({ dispatch }, { text }) {
         const userId = '60fb909e3e17d245f11f1c80';
-        const res = await sentenceClient.create({
+        return createSentence({
             userId,
             text,
             date: new Date(),
-        });
-        commit('SET_DAILY_SAVED_SENTENCE', res.data.sentence);
+        }).then(dispatch('fetchSentences'));
     },
-    async fetchSentences({ commit }) {
+    updateSentence({ dispatch }, { id, text }) {
+        return updateSentence({
+            id,
+            payload: { text },
+        }).then(dispatch('fetchSentences'));
+    },
+    fetchSentences({ commit, getters }) {
         const userId = '60fb909e3e17d245f11f1c80';
-        const res = await userClient.fetchSentences(userId);
-        const logger = (msg) => (x) => {
-            console.log(msg, x);
-            return x;
-        };
-        const sentences = pipe(pathOr([], ['data', 'sentences']), logger('in sentences'), map(sentenceMapper));
-        commit('SET_SENTENCES', sentences(res));
+        return fetchSentences(userId).then((res) => {
+            const sentences = pipe(parseSentenceResponse, map(sentenceMapper));
+            commit('SET_SENTENCES', sentences(res));
+            if (getters.hasSentenceToday) {
+                commit('SET_SENTENCE_TODAY', head(state.sentences));
+            }
+        });
     },
 };
 

@@ -40,9 +40,20 @@ class BaseApi {
         const pathParams = { path, id };
         const url = this.getPath(pathParams);
         const axiosPayload = { ...payload, axios: true };
-        return this.api.put({
+        return this.api.put(url, {
             params,
-            url,
+            data: axiosPayload,
+        });
+    }
+
+    patch({
+        id = '', params = '', path = '', payload = '',
+    }) {
+        const pathParams = { path, id };
+        const url = this.getPath(pathParams);
+        const axiosPayload = { ...payload, axios: true };
+        return this.api.patch(url, {
+            params,
             data: axiosPayload,
         });
     }

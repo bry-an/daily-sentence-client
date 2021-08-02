@@ -7,4 +7,5 @@ const sentenceClient = new BaseApi({
 export default {
     get: (id) => sentenceClient.get({ id }),
     create: (payload) => sentenceClient.post({ payload }),
+    update: ({ payload, id }) => sentenceClient.patch({ id, payload }),
 };
